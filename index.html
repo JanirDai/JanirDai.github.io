@@ -56,54 +56,103 @@
   </div>
 </header>
     <section id="main" class="outer">
-      <article id="post-notebook/beautifulsoup" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-beautifulsoup" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/30/beautifulsoup/">BeautifulSoup文档摘要</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-meta">
-      <a href="/2017/03/30/notebook/beautifulsoup/" class="article-date">
-  <time datetime="2017-03-30T08:22:32.618Z" itemprop="datePublished">2017-03-30</time>
+      <a href="/2017/03/30/beautifulsoup/" class="article-date">
+  <time datetime="2017-03-30T08:52:51.859Z" itemprop="datePublished">2017-03-30</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">Python</a>
+  </div>
+
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#BeautifulSoup学习概要记录<br><strong>Summary:find:[find() find_all() find_parents() find_parent() find_next_siblings() find_previous_siblings() find_all_previous() find_previous()]<br>tag:[.name .attrs .contents .children .descendants .string(s)<br>.stripped_strings .parent(s) .next_sibling(s) .previous_sibling(s)<br>css选择器:[]<br>tag:[append() insert() insert_before() insert_after() clear() extract()]
-</strong></p>
-<p>##1.创建对象<br>    from bs4 import BeautifulSoup<br>    bsObj = BeautifulSoup(html_doc, ‘html.parser’)<br><strong>此处html_doc为html属性的文档</strong><br>    from urllib.request import urlopen<br>    from bs4 import BeautifulSoup<br>    html = urlopen(‘<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>‘)<br>    bsObj = BeautifulSoup(html.read(), ‘html.parser’)<br><strong>再比如：</strong><br>    bsObj = BeautifulSoup(open(‘index.html’))</p>
-<p>##2.调用对象，其中的内容都是可以想办法替换的，具体参见文档<br>soup.title</p>
-<pre><code># &lt;title&gt;The Dormouse story&lt;/title&gt;
-</code></pre><p>soup.title.name    可以对tag.name赋值改变文档内容</p>
-<pre><code># u&apos;title&apos;
-</code></pre><p>soup.title.string</p>
-<pre><code># u&apos;The Dormouses story&apos;
-</code></pre><p>soup.title.parent.name</p>
-<pre><code># u&apos;head&apos;
-</code></pre><p>soup.p</p>
-<pre><code># &lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouses story&lt;/b&gt;&lt;/p&gt;
-</code></pre><p>soup.p[‘class’]   soup.tag.attrs操作类字典</p>
-<pre><code># u&apos;title&apos;
-</code></pre><p>##3.查找对象</p>
-<p>###find()<br>    soup.find(‘a’, id=’link3’)</p>
-<p>###find_all()<br>    for link in soup.find_all(‘a’, class=’sister’):<br>        print(link.get(‘href’))<br>    for tag in soup.find_all(re.compile(“^b”))<br>        print(tag.name)<br>    soup.find_all(href=re.compile(‘elsie’))<br>    soup.find_all([‘a’, ‘b’])<br>    soup.find_all(“a”, limit=2)<br>匹配所有：soup.find_all(True)<br>也可以加入函数soup.find_all(function_name)<br>strings<br>    for string in soup.strings:<br>        print(repr(string))</p>
-<p>##4.从文档中获取所有文字内容<br>    soup.get_text()</p>
-<p>##5.CSS选择器<br>    soup.select(‘title’)</p>
-<p>###通过标签逐层查找<br>    soup.select(‘body a’)</p>
-<p>###找到某个tag下的直接子标签<br>    soup.select(‘head &gt; title’)<br>~~鉴于CSS语法尚未学习，该部分内容以后补上～～</p>
-<p>##5.修改文档</p>
-<p>###追加tag内容:<br>把新元素添加到副节点.contents属性最后<br>    tag.append()<br>把元素插入到指定的位置<br>    tag.insert(1, “but did not endorse”)<br>在当前tag或文本节点前后插入内容:insert_before() insert_after</p>
-<p>###创建tag<br>    new_tag = soup.new_tag(‘a’, href=’http://…’)<br>    original_tag.append(new_tag)</p>
-<p>###移除当前tag内容<br>注意不是删除当前的tag,而是把<a>123</a> 变成<a></a></p>
-<p>###将当前tag移除文档树，并作为方法结果返回<br>extract()实际上产生两个文档树<br>i_tag = soup.i.extract()</p>
-<p>###将当前节点移除文档树并完全销毁<br>soup.i.decompose()</p>
-<p>###移除文档树中的某段内容,并用新tag或文本节点替代<br>    new_tag = soup.new_tag(“b”)<br>    new_tag.string = “example.net”<br>    a_tag.i.replace_with(new_tag)</p>
-<p>###包装，给当前tag套一层父元素<br>wrap()</p>
-<p>###解包，移除tag内的所有tag标签<br>unwrap()</p>
-
+        <p>Summary:<br>find:[find() find_all() find_parents() find_parent() find_next_siblings() find_previous_siblings() find_all_previous() find_previous()]<br>tag:[.name .attrs .contents .children .descendants .string(s)<br>.stripped_strings .parent(s) .next_sibling(s) .previous_sibling(s)<br>css选择器:[]<br>tag:[append() insert() insert_before() insert_after() clear() extract()]<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/30/beautifulsoup/#more">Read More</a>
+          </p>
+        
       
     </div>
     
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bs4/">bs4</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
+      <article id="post-notebook/beautifulsoup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/30/notebook/beautifulsoup/">BeautifulSoup文档摘要</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/03/30/notebook/beautifulsoup/" class="article-date">
+  <time datetime="2017-03-30T08:50:41.879Z" itemprop="datePublished">2017-03-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">Python</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Summary:<br>find:[find() find_all() find_parents() find_parent() find_next_siblings() find_previous_siblings() find_all_previous() find_previous()]<br>tag:[.name .attrs .contents .children .descendants .string(s)<br>.stripped_strings .parent(s) .next_sibling(s) .previous_sibling(s)<br>css选择器:[]<br>tag:[append() insert() insert_before() insert_after() clear() extract()]<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/30/notebook/beautifulsoup/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bs4/">bs4</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+      </footer>
     
   </div>
   
