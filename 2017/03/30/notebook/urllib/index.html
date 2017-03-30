@@ -5,16 +5,16 @@
   
   <title>urllib模块中的方法 - Wind Rises</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="summary:data = parse.urlencode(dict).encode(‘utf-8’)req = request.Request(url, headers, data)page = request.urlopen(req).read().decode(‘utf-8’)request:[urlopen, Request, urlretrieve, urlcleanup()]pars">
+  <meta name="description" content="summary:data = parse.urlencode(dict).encode(‘utf-8’)req = request.Request(url, headers, data)page = request.urlopen(req).read().decode(‘utf-8’)request:[urlopen, Request, urlretrieve, urlcleanup ]parse">
 <meta property="og:type" content="article">
 <meta property="og:title" content="urllib模块中的方法">
 <meta property="og:url" content="http://yoursite.com/2017/03/30/notebook/urllib/index.html">
 <meta property="og:site_name" content="Wind Rises">
-<meta property="og:description" content="summary:data = parse.urlencode(dict).encode(‘utf-8’)req = request.Request(url, headers, data)page = request.urlopen(req).read().decode(‘utf-8’)request:[urlopen, Request, urlretrieve, urlcleanup()]pars">
-<meta property="og:updated_time" content="2017-03-30T13:57:23.892Z">
+<meta property="og:description" content="summary:data = parse.urlencode(dict).encode(‘utf-8’)req = request.Request(url, headers, data)page = request.urlopen(req).read().decode(‘utf-8’)request:[urlopen, Request, urlretrieve, urlcleanup ]parse">
+<meta property="og:updated_time" content="2017-03-30T14:08:08.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="urllib模块中的方法">
-<meta name="twitter:description" content="summary:data = parse.urlencode(dict).encode(‘utf-8’)req = request.Request(url, headers, data)page = request.urlopen(req).read().decode(‘utf-8’)request:[urlopen, Request, urlretrieve, urlcleanup()]pars">
+<meta name="twitter:description" content="summary:data = parse.urlencode(dict).encode(‘utf-8’)req = request.Request(url, headers, data)page = request.urlopen(req).read().decode(‘utf-8’)request:[urlopen, Request, urlretrieve, urlcleanup ]parse">
   
   
     <link rel="icon" href="/favicon.png">
@@ -72,7 +72,7 @@
     
     <div class="article-meta">
       <a href="/2017/03/30/notebook/urllib/" class="article-date">
-  <time datetime="2017-03-30T13:58:10.464Z" itemprop="datePublished">2017-03-30</time>
+  <time datetime="2017-03-30T14:08:08.446Z" itemprop="datePublished">2017-03-30</time>
 </a>
       
   <div class="article-category">
@@ -83,7 +83,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>summary:<br>data = parse.urlencode(dict).encode(‘utf-8’)<br>req = request.Request(url, headers, data)<br>page = request.urlopen(req).read().decode(‘utf-8’)<br>request:[urlopen, Request, urlretrieve, urlcleanup()]<br>parse:[urlencode, urlparse, urljoin,  ]</p>
+        <p>summary:<br>data = parse.urlencode(dict).encode(‘utf-8’)<br>req = request.Request(url, headers, data)<br>page = request.urlopen(req).read().decode(‘utf-8’)<br>request:[urlopen, Request, urlretrieve, urlcleanup ]<br>parse:[urlencode, urlparse, urljoin, quote, urldecode ]<br><a id="more"></a></p>
 <h2 id="1-urllib-request"><a href="#1-urllib-request" class="headerlink" title="1 urllib.request"></a>1 urllib.request</h2><h3 id="1-1-urlopen-url-data-None-timeout-cafile-None-capath-None"><a href="#1-1-urlopen-url-data-None-timeout-cafile-None-capath-None" class="headerlink" title="1.1 urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None)"></a>1.1 urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None)</h3><p>urlopen()打开一个url，返回文件对象,可用类似文件方法处理<br>—————-read(),readline(),readlines(),fileno(),close():对HTTPResponse类型数据进行操作,这些方法的使用方式与文件对象完全一样<br><strong>切记要加上read()方法!!!</strong><br>返回的数据格式为<strong>bytes</strong>类型，需要<strong>decode()</strong>解码，转成str类型<br><strong>参数设置：</strong>data：Post提交的数据，表示访问URL时要传送的数据，即请求报文<br>timeout：设置网站的访问超时</p>
 <p>-info()：返回一个httplib.HTTPMessage对象，表示远程服务器返回的头信息<br>-getcode()：返回Http状态码。如果是http请求，200请求成功完成;404网址未找到<br>-geturl()：返回请求的url</p>
 <pre><code>from urllib.request import urlopen
@@ -103,16 +103,20 @@ req = request.Request(url, headers=headers)
 page = request.urlopen(req).read().decode(&apos;utf-8&apos;)
 </code></pre><p><strong>此处具体可参见《HTTP权威指南》</strong><br>-User-Agent ：这个头部可以携带如下几条信息：浏览器名和版本号、操作系统名和版本号、默认语言<br>-Referer：可以用来防止盗链，有一些网站图片显示来源<a href="http://***.com，就是检查Referer来鉴定的" target="_blank" rel="external">http://***.com，就是检查Referer来鉴定的</a><br>-Connection：表示连接状态，记录Session的状态。<br><strong>使用Firebug查看头信息</strong><br>右键单击使用firebug查看元素，选择网络，全部，刷新界面，展开即可看到header<br><strong>如何构造Request</strong><br>根据在firebug中看到的user-agent即可构造header<br><strong>作用</strong><br>对于反爬虫的网站，可以模拟浏览器登录</p>
 <h3 id="1-3-urlretrieve-url-filename-None-reporthook-None-data-None"><a href="#1-3-urlretrieve-url-filename-None-reporthook-None-data-None" class="headerlink" title="1.3 urlretrieve(url, filename=None, reporthook=None, data=None)"></a>1.3 urlretrieve(url, filename=None, reporthook=None, data=None)</h3><p>将html下载获取到本地磁盘一个临时文件中，返回元组，包括新建文件的路径和HTTPMessage对象</p>
-<h3 id="1-4-urlcleanup"><a href="#1-4-urlcleanup" class="headerlink" title="1.4 urlcleanup()"></a>1.4 urlcleanup()</h3><p>清楚urlretrieve()的缓存</p>
-<h2 id="2-urllib-parse"><a href="#2-urllib-parse" class="headerlink" title="2 urllib.parse"></a>2 urllib.parse</h2><h3 id="2-1-urlparse-url-scheme-’’-allow-fragments-True"><a href="#2-1-urlparse-url-scheme-’’-allow-fragments-True" class="headerlink" title="2.1 urlparse(url, scheme=’’, allow_fragments=True)"></a>2.1 urlparse(url, scheme=’’, allow_fragments=True)</h3><p>url=scheme://netloc/path;parameters?query#fragment<br>urlparse将输入的url分成六个部分，返回一个元组<br>‘’’bash</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from urllib.parse import urlparse<br>o = urlparse(‘<a href="http://www.cwi.nl:80/%7Eguido/Python.html" target="_blank" rel="external">http://www.cwi.nl:80/%7Eguido/Python.html</a>‘)<br>o<br>ParseResult(scheme=’http’, netloc=’www.cwi.nl:80’, path=’/%7Eguido/Python.html’,<br>            params=’’, query=’’, fragment=’’)<br>o.scheme<br>‘http’<br>o.port<br>80<br>o.geturl()<br>‘<a href="http://www.cwi.nl:80/%7Eguido/Python.html" target="_blank" rel="external">http://www.cwi.nl:80/%7Eguido/Python.html</a>‘<br>‘’’</p>
-<h3 id="2-2-urlencode-query-doseq-False-safe-’’-encoding-None-errors-None"><a href="#2-2-urlencode-query-doseq-False-safe-’’-encoding-None-errors-None" class="headerlink" title="2.2 urlencode (query, doseq=False, safe=’’, encoding=None, errors=None )"></a>2.2 urlencode (query, doseq=False, safe=’’, encoding=None, errors=None )</h3><p>urlencode（字典）：将字典转成想要的格式，主要作用就是将url附上要提交的数据data。</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<h3 id="1-4-urlcleanup"><a href="#1-4-urlcleanup" class="headerlink" title="1.4 urlcleanup()"></a>1.4 urlcleanup()</h3><p>清除urlretrieve()的缓存</p>
+<h2 id="2-urllib-parse"><a href="#2-urllib-parse" class="headerlink" title="2 urllib.parse"></a>2 urllib.parse</h2><h3 id="2-1-urlparse-url-scheme-’’-allow-fragments-True"><a href="#2-1-urlparse-url-scheme-’’-allow-fragments-True" class="headerlink" title="2.1 urlparse(url, scheme=’’, allow_fragments=True)"></a>2.1 urlparse(url, scheme=’’, allow_fragments=True)</h3><p>url=scheme://netloc/path;parameters?query#fragment<br>urlparse将输入的url分成六个部分，返回一个元组</p>
+<pre><code>from urllib.parse import urlparse
+o = urlparse(&apos;http://www.cwi.nl:80/%7Eguido/Python.html&apos;)
+o   
+#ParseResult(scheme=&apos;http&apos;, netloc=&apos;www.cwi.nl:80&apos;, path=&apos;/%7Eguido/Python.html&apos;,
+        params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;&apos;)
+o.scheme
+# &apos;http&apos;
+o.port
+# 80
+o.geturl()
+# &apos;http://www.cwi.nl:80/%7Eguido/Python.html&apos;
+</code></pre><h3 id="2-2-urlencode-query-doseq-False-safe-’’-encoding-None-errors-None"><a href="#2-2-urlencode-query-doseq-False-safe-’’-encoding-None-errors-None" class="headerlink" title="2.2 urlencode (query, doseq=False, safe=’’, encoding=None, errors=None )"></a>2.2 urlencode (query, doseq=False, safe=’’, encoding=None, errors=None )</h3><p>urlencode（字典）：将字典转成想要的格式，主要作用就是将url附上要提交的数据data。</p>
 <pre><code>data = {
      &apos;first&apos;: &apos;true&apos;,
      &apos;pn&apos;: 1,
@@ -122,20 +126,33 @@ data = parse.urlencode(data).encode(&apos;utf-8&apos;)
 </code></pre><p>经过urlencode（）转换后的data数据为?first=true?pn=1?kd=Python，最后提交的url为<br><a href="http://www.lagou.com/jobs/positionAjax.json?first=true?pn=1?kd=Python" target="_blank" rel="external">http://www.lagou.com/jobs/positionAjax.json?first=true?pn=1?kd=Python</a><br>Post的数据必须是bytes或者iterable of bytes，不能是str，因此需要进行encode（）编码</p>
 <pre><code>page = request.urlopen(req, data=data).read()
 </code></pre><p>当然，也可以把data的数据封装在urlopen（）参数中</p>
-<p><strong>关于data</strong><br>‘’’bash<br>from urllib import request, parse<br>url = r’<a href="http://www.lagou.com/jobs/positionAjax.json?" target="_blank" rel="external">http://www.lagou.com/jobs/positionAjax.json?</a>‘<br>headers = {<br>    ‘User-Agent’: r’Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) ‘<br>                  r’Chrome/45.0.2454.85 Safari/537.36 115Browser/6.0.3’,<br>    ‘Referer’: r’<a href="http://www.lagou.com/zhaopin/Python/?labelWords=label" target="_blank" rel="external">http://www.lagou.com/zhaopin/Python/?labelWords=label</a>‘,<br>    ‘Connection’: ‘keep-alive’<br>}<br>data = {<br>    ‘first’: ‘true’,<br>    ‘pn’: 1,<br>    ‘kd’: ‘Python’<br>}<br>data = parse.urlencode(data).encode(‘utf-8’)<br>req = request.Request(url, headers=headers, data=data)<br>page = request.urlopen(req).read()<br>page = page.decode(‘utf-8’)<br>‘’’</p>
-<h3 id="2-3-urljoin-base-url-allow-fragments-True"><a href="#2-3-urljoin-base-url-allow-fragments-True" class="headerlink" title="2.3 urljoin(base, url, allow_fragments=True)"></a>2.3 urljoin(base, url, allow_fragments=True)</h3><p>构建一个完整的URL=base+url,下例子中，服务器的base从给出的base中解析出来，Python.html指向服务器下某一文件，故被剥离，用FAQ.html替换<br>‘’’bash</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from urllib.parse import urljoin<br>urljoin(‘<a href="http://www.cwi.nl/%7Eguido/Python.html" target="_blank" rel="external">http://www.cwi.nl/%7Eguido/Python.html</a>‘, ‘FAQ.html’)<br>‘<a href="http://www.cwi.nl/%7Eguido/FAQ.html" target="_blank" rel="external">http://www.cwi.nl/%7Eguido/FAQ.html</a>‘<br>‘’’</p>
-<h3 id="2-4-quote-string-对单个字符串转换"><a href="#2-4-quote-string-对单个字符串转换" class="headerlink" title="2.4 quote(string) 对单个字符串转换"></a>2.4 quote(string) 对单个字符串转换</h3><pre><code>quote(&apos;魔兽&apos;)
+<p><strong>关于data</strong></p>
+<pre><code>from urllib import request, parse
+url = r&apos;http://www.lagou.com/jobs/positionAjax.json?&apos;
+headers = {
+    &apos;User-Agent&apos;: r&apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) &apos;
+                  r&apos;Chrome/45.0.2454.85 Safari/537.36 115Browser/6.0.3&apos;,
+    &apos;Referer&apos;: r&apos;http://www.lagou.com/zhaopin/Python/?labelWords=label&apos;,
+    &apos;Connection&apos;: &apos;keep-alive&apos;
+}
+data = {
+    &apos;first&apos;: &apos;true&apos;,
+    &apos;pn&apos;: 1,
+    &apos;kd&apos;: &apos;Python&apos;
+}
+data = parse.urlencode(data).encode(&apos;utf-8&apos;)
+req = request.Request(url, headers=headers, data=data)
+page = request.urlopen(req).read()
+page = page.decode(&apos;utf-8&apos;)
+</code></pre><h3 id="2-3-urljoin-base-url-allow-fragments-True"><a href="#2-3-urljoin-base-url-allow-fragments-True" class="headerlink" title="2.3 urljoin(base, url, allow_fragments=True)"></a>2.3 urljoin(base, url, allow_fragments=True)</h3><p>构建一个完整的URL=base+url,下例子中，服务器的base从给出的base中解析出来，Python.html指向服务器下某一文件，故被剥离，用FAQ.html替换</p>
+<pre><code>from urllib.parse import urljoin
+urljoin(&apos;http://www.cwi.nl/%7Eguido/Python.html&apos;, &apos;FAQ.html&apos;)
+# &apos;http://www.cwi.nl/%7Eguido/FAQ.html&apos;
+</code></pre><h3 id="2-4-quote-string-对单个字符串转换"><a href="#2-4-quote-string-对单个字符串转换" class="headerlink" title="2.4 quote(string) 对单个字符串转换"></a>2.4 quote(string) 对单个字符串转换</h3><pre><code>quote(&apos;魔兽&apos;)
 # %C4%A7%CA%DE
 </code></pre><h3 id="2-5-urldecode-string"><a href="#2-5-urldecode-string" class="headerlink" title="2.5 urldecode(string)"></a>2.5 urldecode(string)</h3><p>quote的逆过程<br>    urldecode(‘%C4%A7%CA%DE’)</p>
 <pre><code># &apos;魔兽&apos;
-</code></pre></blockquote>
-</blockquote>
-</blockquote>
-<p>引用：</p>
+</code></pre><p>引用：</p>
 <blockquote>
 <p> <a href="http://www.cnblogs.com/Lands-ljk/p/5447127.html" target="_blank" rel="external">http://www.cnblogs.com/Lands-ljk/p/5447127.html</a><br> <a href="http://m.blog.csdn.net/article/details?id=52109225" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=52109225</a><br> <a href="http://www.111cn.net/phper/python/68713.htm" target="_blank" rel="external">http://www.111cn.net/phper/python/68713.htm</a></p>
 </blockquote>
@@ -146,6 +163,8 @@ data = parse.urlencode(data).encode(&apos;utf-8&apos;)
     
       <footer class="article-footer">
         
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/parse/">parse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/request/">request</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/urllib/">urllib</a></li></ul>
+
       </footer>
     
   </div>
