@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/31/notebook/urllib/index.html">
 <meta property="og:site_name" content="Wind Rises">
 <meta property="og:description" content="summary:data = parse.urlencode(dict).encode(‘utf-8’)req = request.Request(url, headers, data)page = request.urlopen(req).read().decode(‘utf-8’)request:[urlopen, Request, urlretrieve, urlcleanup ]parse">
-<meta property="og:updated_time" content="2017-03-31T00:41:42.544Z">
+<meta property="og:updated_time" content="2017-03-31T00:58:53.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="urllib模块中的方法">
 <meta name="twitter:description" content="summary:data = parse.urlencode(dict).encode(‘utf-8’)req = request.Request(url, headers, data)page = request.urlopen(req).read().decode(‘utf-8’)request:[urlopen, Request, urlretrieve, urlcleanup ]parse">
@@ -72,7 +72,7 @@
     
     <div class="article-meta">
       <a href="/2017/03/31/notebook/urllib/" class="article-date">
-  <time datetime="2017-03-31T00:41:42.580Z" itemprop="datePublished">2017-03-31</time>
+  <time datetime="2017-03-31T00:58:53.954Z" itemprop="datePublished">2017-03-31</time>
 </a>
       
   <div class="article-category">
@@ -150,17 +150,36 @@ urljoin(&apos;http://www.cwi.nl/%7Eguido/Python.html&apos;, &apos;FAQ.html&apos;
 # &apos;http://www.cwi.nl/%7Eguido/FAQ.html&apos;
 </code></pre><h3 id="2-4-quote-string-对单个字符串转换"><a href="#2-4-quote-string-对单个字符串转换" class="headerlink" title="2.4 quote(string) 对单个字符串转换"></a>2.4 quote(string) 对单个字符串转换</h3><pre><code>quote(&apos;魔兽&apos;)
 # %C4%A7%CA%DE
-</code></pre><h3 id="2-5-urldecode-string"><a href="#2-5-urldecode-string" class="headerlink" title="2.5 urldecode(string)"></a>2.5 urldecode(string)</h3><p>quote的逆过程<br>    urldecode(‘%C4%A7%CA%DE’)</p>
-<pre><code># &apos;魔兽&apos;
-</code></pre><h2 id="3-urllib-error"><a href="#3-urllib-error" class="headerlink" title="3 urllib.error"></a>3 urllib.error</h2><p>定义了因为urllib.request引起的异常类，异常大类为URLError,HTTPError是其子类<br><strong>URLError可能产生的原因：</strong></p>
+</code></pre><h3 id="2-5-urldecode-string"><a href="#2-5-urldecode-string" class="headerlink" title="2.5 urldecode(string)"></a>2.5 urldecode(string)</h3><p>quote的逆过程</p>
+<pre><code>urldecode(&apos;%C4%A7%CA%DE&apos;)
+# &apos;魔兽&apos;
+</code></pre><h2 id="3-urllib-error"><a href="#3-urllib-error" class="headerlink" title="3 urllib.error"></a>3 urllib.error</h2><p>定义了因为urllib.request引起的异常类，异常大类为URLError,HTTPError是其子类</p>
+<p><strong>URLError可能产生的原因：</strong></p>
 <ul>
 <li>网络无连接，即本机无法上网</li>
 <li>连接不到特定的服务器</li>
-<li>服务器不存在<br><strong>常用方法：</strong>URLError.reason</li>
+<li>服务器不存在</li>
 </ul>
-<p>HTTPError:利用urlopen方法发出一个请求时，服务器上都会对应一个应答对象response，其中它包含一个数字”状态码”。<br><strong>状态码:</strong>1XX：企图成功 2XX：成功 3XX：重定向 4XX：客户端错误 5XX：服务器错误<br><strong>常用方法:</strong>HTTPError:[.code, .reason, .headers]<br>引用实例：<br>    req = urllib.request.Request(‘<a href="http://www.111cn.net" target="_blank" rel="external">http://www.111cn.net</a>‘)<br>    try:<br>        urllib.request.urlopen(req)<br>    except urllib.error.HTTPError as e:<br>        print(e.code)        //错误代号，比如403<br>        print(e.reason)      //错误原因，比如Forbidden<br>    print(e.read().decode(‘utf-8’))</p>
-<p>在异常处理中，父类异常需要写在子类之后<br>    try:<br>        req = urllib.request.Request(‘<a href="http://blog.csdn.net/cqcre" target="_blank" rel="external">http://blog.csdn.net/cqcre</a>‘)<br>    except urllib.error.HTTPError as e:<br>        if hasattr(e,’code’):  //避免出现属性输出报错现象，<br>                print e.code       //先对异常的属性进行判断<br>    except urllib.error.URLError as e:<br>        print e.reason<br>    else:<br>        print(‘ok’)</p>
-<p>关于urllib的更多内容可以参考<br><a href="http://www.111cn.net/phper/python/68713.htm" target="_blank" rel="external">http://www.111cn.net/phper/python/68713.htm</a></p>
+<p><strong>常用方法：</strong>URLError.reason</p>
+<p><strong>HTTPError：</strong>利用urlopen方法发出一个请求时，服务器上都会对应一个应答对象response，其中它包含一个数字”状态码”。<br><strong>状态码：</strong> 1XX：企图成功 2XX：成功 3XX：重定向 4XX：客户端错误 5XX：服务器错误<br><strong>常用方法：</strong>HTTPError:[.code, .reason, .headers]<br><strong>引用实例：</strong></p>
+<pre><code>req = urllib.request.Request(&apos;http://www.111cn.net&apos;)
+try:
+    urllib.request.urlopen(req)
+except urllib.error.HTTPError as e:
+    print(e.code)        //错误代号，比如403
+    print(e.reason)      //错误原因，比如Forbidden
+print(e.read().decode(&apos;utf-8&apos;))
+</code></pre><p>在异常处理中，父类异常需要写在子类之后</p>
+<pre><code>try:
+    req = urllib.request.Request(&apos;http://blog.csdn.net/cqcre&apos;)
+except urllib.error.HTTPError as e:
+    if hasattr(e,&apos;code&apos;):  //避免出现属性输出报错现象，
+            print e.code       //先对异常的属性进行判断
+except urllib.error.URLError as e:
+    print e.reason
+else:
+    print(&apos;ok&apos;)
+</code></pre><p>关于urllib的更多内容可以参考<br><a href="http://www.111cn.net/phper/python/68713.htm" target="_blank" rel="external">http://www.111cn.net/phper/python/68713.htm</a></p>
 <p>引用：</p>
 <blockquote>
 <p> <a href="http://www.cnblogs.com/Lands-ljk/p/5447127.html" target="_blank" rel="external">http://www.cnblogs.com/Lands-ljk/p/5447127.html</a><br> <a href="http://m.blog.csdn.net/article/details?id=52109225" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=52109225</a><br> <a href="http://www.111cn.net/phper/python/68713.htm" target="_blank" rel="external">http://www.111cn.net/phper/python/68713.htm</a><br> <a href="http://dataunion.org/16499.html" target="_blank" rel="external">http://dataunion.org/16499.html</a></p>
@@ -180,6 +199,14 @@ urljoin(&apos;http://www.cwi.nl/%7Eguido/Python.html&apos;, &apos;FAQ.html&apos;
   
     
 <nav id="article-nav">
+  
+    <a href="/2017/04/01/notebook/module_requests/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Module_Requests
+        
+      </div>
+    </a>
   
   
     <a href="/2017/03/30/notebook/beautifulsoup/" id="article-nav-older" class="article-nav-link-wrap">
