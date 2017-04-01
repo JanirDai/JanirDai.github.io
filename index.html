@@ -56,6 +56,78 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-notebook/email" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    <div class="article-meta">
+      <a href="/2017/04/01/notebook/email/" class="article-date">
+  <time datetime="2017-04-01T13:27:08.092Z" itemprop="datePublished">2017-04-01</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动获取天气预报并且发送邮件"><a href="#自动获取天气预报并且发送邮件" class="headerlink" title="自动获取天气预报并且发送邮件"></a>自动获取天气预报并且发送邮件</h1><h3 id="哈哈哈，没有参考别人的代码真实成就感满满"><a href="#哈哈哈，没有参考别人的代码真实成就感满满" class="headerlink" title="哈哈哈，没有参考别人的代码真实成就感满满"></a>哈哈哈，没有参考别人的代码真实成就感满满</h3><pre><code>#!/usr/bin/env python3.6
+# -*- coding:utf-8 -*- 
+
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+
+from email.mime.text import MIMEText
+from email.header import Header
+import smtplib
+import getpass   
+
+def get_weather():
+    weather = []
+    html = urlopen(&apos;http://tianqi.2345.com/today-57036.htm&apos;)
+    bsObj = BeautifulSoup(html.read(), &apos;html.parser&apos;)
+    link1 = bsObj.find(&quot;div&quot;, {&quot;class&quot;:&quot;emoticon&quot;, &quot;id&quot;:&quot;emoticonId&quot;})
+    weather.append(link1.span.get_text())
+    link2 = bsObj.find(&quot;ul&quot;, {&quot;class&quot;:&quot;parameter&quot;})
+    wthers = link2.findAll(&quot;li&quot;)
+    for wther in wthers:
+    weather.append(wther.b.get_text()+ wther.i.get_text())
+    return weather
+
+def send_mail(msg):
+    sender = input(&apos;From: &apos;)
+    password = getpass.getpass(&apos;Password: &apos;)
+    smtp_server = input(&apos;smtp server: &apos;)
+    receivers = &apos;1336312017@qq.com&apos;
+    message = MIMEText(msg, &apos;plain&apos;, &apos;utf-8&apos;)
+    message[&apos;From&apos;]= Header(sender)
+    message[&apos;To&apos;]= Header(receivers)
+    message[&apos;Subject&apos;]= Header(&apos;今天的天气预报&apos;, &apos;utf-8&apos;)
+    server = smtplib.SMTP()
+    server.connect(smtp_server, 25)
+    server.login(sender, password)
+    server.sendmail(sender, receivers, message.as_string())
+    print(&apos;邮件发送成功&apos;)
+    server.quit()
+
+weatherlist = get_weather()
+msg = &apos;\n&apos;.join(weatherlist)
+send_mail(msg)
+</code></pre>
+      
+    </div>
+    
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-notebook/beautifulsoup" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
