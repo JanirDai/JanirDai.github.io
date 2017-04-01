@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/01/notebook/email/index.html">
 <meta property="og:site_name" content="Wind Rises">
 <meta property="og:description" content="哈哈哈，没有搬别人的代码，自己写的真是让人成就感满满">
-<meta property="og:updated_time" content="2017-04-01T13:32:56.965Z">
+<meta property="og:updated_time" content="2017-04-01T13:35:42.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动获取天气预报并且发送邮件">
 <meta name="twitter:description" content="哈哈哈，没有搬别人的代码，自己写的真是让人成就感满满">
@@ -72,7 +72,7 @@
     
     <div class="article-meta">
       <a href="/2017/04/01/notebook/email/" class="article-date">
-  <time datetime="2017-04-01T13:32:57.031Z" itemprop="datePublished">2017-04-01</time>
+  <time datetime="2017-04-01T13:35:42.323Z" itemprop="datePublished">2017-04-01</time>
 </a>
       
   <div class="article-category">
@@ -112,7 +112,7 @@ def send_mail(msg):
     sender = input(&apos;From: &apos;)
     password = getpass.getpass(&apos;Password: &apos;)
     smtp_server = input(&apos;smtp server: &apos;)
-    receivers = &apos;1336312017@qq.com&apos;
+    receivers = &apos;3376113410@qq.com&apos;
     message = MIMEText(msg, &apos;plain&apos;, &apos;utf-8&apos;)
     message[&apos;From&apos;]= Header(sender)
     message[&apos;To&apos;]= Header(receivers)
