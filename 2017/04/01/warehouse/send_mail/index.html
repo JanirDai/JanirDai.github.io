@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>自动获取天气预报并且发送邮件 - Wind Rises</title>
+  <title>send an email - Wind Rises</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哈哈哈，没有搬别人的代码，自己写的真是让人成就感满满">
+  <meta name="description" content="function:to send an email using python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自动获取天气预报并且发送邮件">
-<meta property="og:url" content="http://yoursite.com/2017/04/01/notebook/email/index.html">
+<meta property="og:title" content="send an email">
+<meta property="og:url" content="http://yoursite.com/2017/04/01/warehouse/send_mail/index.html">
 <meta property="og:site_name" content="Wind Rises">
-<meta property="og:description" content="哈哈哈，没有搬别人的代码，自己写的真是让人成就感满满">
-<meta property="og:updated_time" content="2017-04-01T13:38:31.439Z">
+<meta property="og:description" content="function:to send an email using python">
+<meta property="og:updated_time" content="2017-04-01T13:46:23.515Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自动获取天气预报并且发送邮件">
-<meta name="twitter:description" content="哈哈哈，没有搬别人的代码，自己写的真是让人成就感满满">
+<meta name="twitter:title" content="send an email">
+<meta name="twitter:description" content="function:to send an email using python">
   
   
     <link rel="icon" href="/favicon.png">
@@ -56,7 +56,7 @@
     </div>
   </div>
 </header>
-    <section id="main" class="outer"><article id="post-notebook/email" class="article article-type-post" itemscope itemprop="blogPost">
+    <section id="main" class="outer"><article id="post-warehouse/send_mail" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -64,55 +64,38 @@
         
   
     <h1 class="article-title" itemprop="name">
-      自动获取天气预报并且发送邮件
+      send an email
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2017/04/01/notebook/email/" class="article-date">
-  <time datetime="2017-04-01T13:38:31.490Z" itemprop="datePublished">2017-04-01</time>
+      <a href="/2017/04/01/warehouse/send_mail/" class="article-date">
+  <time datetime="2017-04-01T13:46:23.565Z" itemprop="datePublished">2017-04-01</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Program-DIY/">Program DIY</a>
+    <a class="article-category-link" href="/categories/code-repository/">code repository</a>
   </div>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>哈哈哈，没有搬别人的代码，自己写的真是让人成就感满满</strong></p>
-<a id="more"></a>
+        <p><strong>function:to send an email using python</strong><br><a id="more"></a></p>
 <pre><code>#!/usr/bin/env python3.6
-# -*- coding:utf-8 -*- 
-
-from bs4 import BeautifulSoup
-from urllib.request import urlopen
-
+# encoding: utf-8
 from email.mime.text import MIMEText
 from email.header import Header
 import smtplib
 import getpass   
 
-def get_weather():
-    weather = []
-    html = urlopen(&apos;http://tianqi.2345.com/today-57036.htm&apos;)
-    bsObj = BeautifulSoup(html.read(), &apos;html.parser&apos;)
-    link1 = bsObj.find(&quot;div&quot;, {&quot;class&quot;:&quot;emoticon&quot;, &quot;id&quot;:&quot;emoticonId&quot;})
-    weather.append(link1.span.get_text())
-    link2 = bsObj.find(&quot;ul&quot;, {&quot;class&quot;:&quot;parameter&quot;})
-    wthers = link2.findAll(&quot;li&quot;)
-    for wther in wthers:
-    weather.append(wther.b.get_text()+ wther.i.get_text())
-    return weather
-
 def send_mail(msg):
     sender = input(&apos;From: &apos;)
-    password = getpass.getpass(&apos;Password: &apos;)
+    password = getpass.getpass(&apos;Password&apos;)
     smtp_server = input(&apos;smtp server: &apos;)
-    receivers = &apos;3376113410@qq.com&apos;
+    receivers = &apos;1094599772@qq.com&apos;
     message = MIMEText(msg, &apos;plain&apos;, &apos;utf-8&apos;)
     message[&apos;From&apos;]= Header(sender)
     message[&apos;To&apos;]= Header(receivers)
@@ -124,9 +107,7 @@ def send_mail(msg):
     print(&apos;邮件发送成功&apos;)
     server.quit()
 
-weatherlist = get_weather()
-msg = &apos;\n&apos;.join(weatherlist)
-send_mail(msg)
+send_mail(&apos;hello&apos;)
 </code></pre>
       
     </div>
@@ -141,17 +122,9 @@ send_mail(msg)
     
 <nav id="article-nav">
   
-    <a href="/2017/04/01/warehouse/send_mail/" id="article-nav-newer" class="article-nav-link-wrap">
-      <div class="article-nav-title"><span>&lt;</span>&nbsp;
-        
-          send an email
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/01/notebook/beautifulsoup/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">BeautifulSoup摘要&nbsp;<span>&gt;</span></div>
+    <a href="/2017/04/01/notebook/email/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">自动获取天气预报并且发送邮件&nbsp;<span>&gt;</span></div>
     </a>
   
 </nav>
