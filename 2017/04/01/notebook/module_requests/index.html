@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Module_Requests - Wind Rises</title>
+  <title>Requests模块摘要 - Wind Rises</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="summary: cookie部分内容未涉及，暂蒙圈，后补requests:[.get, .put, .delete, .head, .options]requests.get(url,params,headers,auth,cookies,timeout,proxies)requests.post(url,data,files)r:[.status_code, .text, .content,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Module_Requests">
+<meta property="og:title" content="Requests模块摘要">
 <meta property="og:url" content="http://yoursite.com/2017/04/01/notebook/module_requests/index.html">
 <meta property="og:site_name" content="Wind Rises">
 <meta property="og:description" content="summary: cookie部分内容未涉及，暂蒙圈，后补requests:[.get, .put, .delete, .head, .options]requests.get(url,params,headers,auth,cookies,timeout,proxies)requests.post(url,data,files)r:[.status_code, .text, .content,">
-<meta property="og:updated_time" content="2017-04-01T01:16:51.064Z">
+<meta property="og:updated_time" content="2017-04-01T01:20:59.971Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Module_Requests">
+<meta name="twitter:title" content="Requests模块摘要">
 <meta name="twitter:description" content="summary: cookie部分内容未涉及，暂蒙圈，后补requests:[.get, .put, .delete, .head, .options]requests.get(url,params,headers,auth,cookies,timeout,proxies)requests.post(url,data,files)r:[.status_code, .text, .content,">
   
   
@@ -64,7 +64,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Module_Requests
+      Requests模块摘要
     </h1>
   
 
@@ -72,7 +72,7 @@
     
     <div class="article-meta">
       <a href="/2017/04/01/notebook/module_requests/" class="article-date">
-  <time datetime="2017-04-01T01:17:27.237Z" itemprop="datePublished">2017-04-01</time>
+  <time datetime="2017-04-01T01:21:00.012Z" itemprop="datePublished">2017-04-01</time>
 </a>
       
   <div class="article-category">
@@ -83,7 +83,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>summary: cookie部分内容未涉及，暂蒙圈，后补<br>requests:[.get, .put, .delete, .head, .options]<br>requests.get(url,params,headers,auth,cookies,timeout,proxies)<br>requests.post(url,data,files)<br>r:[.status_code, .text, .content, .cookies</p>
+        <p>summary: cookie部分内容未涉及，暂蒙圈，后补<br>requests:[.get, .put, .delete, .head, .options]<br>requests.get(url,params,headers,auth,cookies,timeout,proxies)<br>requests.post(url,data,files)<br>r:[.status_code, .text, .content, .cookies]<br><a id="more"></a></p>
 <h1 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h1><pre><code>import requests
 r = requests.get(url)   
 </code></pre><p>除了[.get]也可以使用其他HTTP请求类型：[.put, .delete, .head, .options]</p>
@@ -95,10 +95,18 @@ r = request.get(url, auth=(&apos;usr&apos;, &apos;passwd&apos;))   //身份认�
 </code></pre><h3 id="post实例"><a href="#post实例" class="headerlink" title="post实例"></a>post实例</h3><pre><code>requests.post(url, data={&apos;conment&apos;: &apos;test post&apos;})
 files = {&apos;file&apos;: open(&apos;/home/123.md&apos;,&apos;rb&apos;)}
 requests.post(url, files=files)
-</code></pre><p>#读取内容<br>    r=requests.get(url)<br>    r.text      //解码后返回的数据<br>    r.encoding  //找到HTTP头部对响应的编码，也可自定义<br>    r.content<br>    r.status_code //检测响应状态码，比如200，404<br>    r.raise_for_status() //对于4XX和5XX的响应抛出异常</p>
-<p>##读取二进制响应，比如图片<br>    from PIL import Image<br>    from io import BytesIO<br>    i = Image.open(BytesIO(r.content))</p>
-<p>##对于JSON<br>    r = requests.post(url, data=json.dumps({‘some’: ‘data’}))<br>    r.json()</p>
-<p><strong>引用：</strong></p>
+</code></pre><h1 id="读取内容"><a href="#读取内容" class="headerlink" title="读取内容"></a>读取内容</h1><pre><code>r=requests.get(url)
+r.text      //解码后返回的数据
+r.encoding  //找到HTTP头部对响应的编码，也可自定义
+r.content
+r.status_code //检测响应状态码，比如200，404
+r.raise_for_status() //对于4XX和5XX的响应抛出异常
+</code></pre><h2 id="读取二进制响应，比如图片"><a href="#读取二进制响应，比如图片" class="headerlink" title="读取二进制响应，比如图片"></a>读取二进制响应，比如图片</h2><pre><code>from PIL import Image
+from io import BytesIO
+i = Image.open(BytesIO(r.content))
+</code></pre><h2 id="对于JSON"><a href="#对于JSON" class="headerlink" title="对于JSON"></a>对于JSON</h2><pre><code>r = requests.post(url, data=json.dumps({&apos;some&apos;: &apos;data&apos;}))
+r.json()
+</code></pre><p><strong>引用：</strong></p>
 <blockquote>
 <p><a href="http://docs.python-requests.org/zh_CN/latest/user/quickstart.html" target="_blank" rel="external">http://docs.python-requests.org/zh_CN/latest/user/quickstart.html</a><br><a href="http://blog.csdn.net/shanzhizi/article/details/50903748" target="_blank" rel="external">http://blog.csdn.net/shanzhizi/article/details/50903748</a></p>
 </blockquote>
@@ -118,10 +126,14 @@ requests.post(url, files=files)
     
 <nav id="article-nav">
   
-  
-    <a href="/2017/03/31/notebook/urllib/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">urllib模块中的方法&nbsp;<span>&gt;</span></div>
+    <a href="/2017/04/01/notebook/urllib/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          urllib模块摘要
+        
+      </div>
     </a>
+  
   
 </nav>
 

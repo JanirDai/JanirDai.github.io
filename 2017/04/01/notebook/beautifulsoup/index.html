@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>BeautifulSoup摘要 - Wind Rises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Summary:find:[find() find_all() find_parents() find_parent() find_next_siblings() find_previous_siblings() find_all_previous() find_previous()]tag:[.name .attrs .contents .children .descendants .strin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BeautifulSoup摘要">
+<meta property="og:url" content="http://yoursite.com/2017/04/01/notebook/beautifulsoup/index.html">
+<meta property="og:site_name" content="Wind Rises">
+<meta property="og:description" content="Summary:find:[find() find_all() find_parents() find_parent() find_next_siblings() find_previous_siblings() find_all_previous() find_previous()]tag:[.name .attrs .contents .children .descendants .strin">
+<meta property="og:updated_time" content="2017-04-01T01:21:54.593Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BeautifulSoup摘要">
+<meta name="twitter:description" content="Summary:find:[find() find_all() find_parents() find_parent() find_next_siblings() find_previous_siblings() find_all_previous() find_previous()]tag:[.name .attrs .contents .children .descendants .strin">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-notebook/beautifulsoup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BeautifulSoup摘要
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/04/01/notebook/beautifulsoup/" class="article-date">
+  <time datetime="2017-04-01T01:21:54.632Z" itemprop="datePublished">2017-04-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">Python</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Summary:<br>find:[find() find_all() find_parents() find_parent() find_next_siblings() find_previous_siblings() find_all_previous() find_previous()]<br>tag:[.name .attrs .contents .children .descendants .string(s)<br>.stripped_strings .parent(s) .next_sibling(s) .previous_sibling(s)<br>css选择器:[]<br>tag:[append() insert() insert_before() insert_after() clear() extract()]<br><a id="more"></a></p>
+<h2 id="1-创建对象"><a href="#1-创建对象" class="headerlink" title="1.创建对象"></a>1.创建对象</h2><pre><code>from bs4 import BeautifulSoup
+bsObj = BeautifulSoup(html_doc, &apos;html.parser&apos;)
+</code></pre><p><strong>此处html_doc为html属性的文档</strong></p>
+<pre><code>from urllib.request import urlopen
+from bs4 import BeautifulSoup
+html = urlopen(&apos;http://www.baidu.com&apos;)
+bsObj = BeautifulSoup(html.read(), &apos;html.parser&apos;)
+</code></pre><p><strong>再比如：</strong></p>
+<pre><code>bsObj = BeautifulSoup(open(&apos;index.html&apos;))
+</code></pre><h2 id="2-调用对象，其中的内容都是可以想办法替换的，具体参见文档"><a href="#2-调用对象，其中的内容都是可以想办法替换的，具体参见文档" class="headerlink" title="2.调用对象，其中的内容都是可以想办法替换的，具体参见文档"></a>2.调用对象，其中的内容都是可以想办法替换的，具体参见文档</h2><pre><code>soup.title
+# &lt;title&gt;The Dormouse story&lt;/title&gt;
+soup.title.name    //可以对tag.name赋值改变文档内容
+# u&apos;title&apos;
+soup.title.string
+# u&apos;The Dormouses story&apos;
+soup.title.parent.name
+# u&apos;head&apos;
+soup.p
+# &lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouses story&lt;/b&gt;&lt;/p&gt;
+soup.p[&apos;class&apos;]   //soup.tag.attrs操作类字典
+# u&apos;title&apos;
+</code></pre><h2 id="3-查找对象"><a href="#3-查找对象" class="headerlink" title="3.查找对象"></a>3.查找对象</h2><h3 id="find"><a href="#find" class="headerlink" title="find()"></a>find()</h3><pre><code>soup.find(&apos;a&apos;, id=&apos;link3&apos;)
+</code></pre><h3 id="find-all"><a href="#find-all" class="headerlink" title="find_all()"></a>find_all()</h3><pre><code>for link in soup.find_all(&apos;a&apos;, class=&apos;sister&apos;):
+    print(link.get(&apos;href&apos;))
+for tag in soup.find_all(re.compile(&quot;^b&quot;))
+    print(tag.name)    
+soup.find_all(href=re.compile(&apos;elsie&apos;))
+soup.find_all([&apos;a&apos;, &apos;b&apos;])
+soup.find_all(&quot;a&quot;, limit=2)
+soup.find_all(True)           //匹配所有
+soup.find_all(function_name)  //也可匹配函数
+</code></pre><h3 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h3><pre><code>for string in soup.strings:
+    print(repr(string))
+</code></pre><h2 id="4-从文档中获取所有文字内容"><a href="#4-从文档中获取所有文字内容" class="headerlink" title="4.从文档中获取所有文字内容"></a>4.从文档中获取所有文字内容</h2><pre><code>soup.get_text()
+</code></pre><h2 id="5-CSS选择器"><a href="#5-CSS选择器" class="headerlink" title="5.CSS选择器"></a>5.CSS选择器</h2><pre><code>soup.select(&apos;title&apos;)
+</code></pre><h3 id="通过标签逐层查找"><a href="#通过标签逐层查找" class="headerlink" title="通过标签逐层查找"></a>通过标签逐层查找</h3><pre><code>soup.select(&apos;body a&apos;)
+</code></pre><h3 id="找到某个tag下的直接子标签"><a href="#找到某个tag下的直接子标签" class="headerlink" title="找到某个tag下的直接子标签"></a>找到某个tag下的直接子标签</h3><pre><code>soup.select(&apos;head &gt; title&apos;)
+</code></pre><p><del>鉴于CSS语法尚未学习，该部分内容以后补上</del></p>
+<h2 id="5-修改文档"><a href="#5-修改文档" class="headerlink" title="5.修改文档"></a>5.修改文档</h2><h3 id="追加tag内容"><a href="#追加tag内容" class="headerlink" title="追加tag内容:"></a>追加tag内容:</h3><pre><code>tag.append()          //把新元素添加到副节点.contents属性最后
+tag.insert(1, &quot;but did not endorse&quot;) //把元素插入到指定的位置
+insert_before() insert_after() //在当前tag或文本节点前后插入内容
+</code></pre><h3 id="创建tag"><a href="#创建tag" class="headerlink" title="创建tag"></a>创建tag</h3><pre><code>new_tag = soup.new_tag(&apos;a&apos;, href=&apos;http://...&apos;)
+original_tag.append(new_tag)
+</code></pre><h3 id="移除当前tag内容"><a href="#移除当前tag内容" class="headerlink" title="移除当前tag内容"></a>移除当前tag内容</h3><p>tag.clear()注意不是删除当前的tag,而是把<a>123</a> 变成<a></a></p>
+<pre><code>tag.clear()
+</code></pre><h3 id="将当前tag移除文档树，并作为方法结果返回"><a href="#将当前tag移除文档树，并作为方法结果返回" class="headerlink" title="将当前tag移除文档树，并作为方法结果返回"></a>将当前tag移除文档树，并作为方法结果返回</h3><p>extract()实际上产生两个文档树</p>
+<pre><code>i_tag = soup.i.extract()
+</code></pre><h3 id="将当前节点移除文档树并完全销毁"><a href="#将当前节点移除文档树并完全销毁" class="headerlink" title="将当前节点移除文档树并完全销毁"></a>将当前节点移除文档树并完全销毁</h3><pre><code>soup.i.decompose()
+</code></pre><h3 id="移除文档树中的某段内容-并用新tag或文本节点替代"><a href="#移除文档树中的某段内容-并用新tag或文本节点替代" class="headerlink" title="移除文档树中的某段内容,并用新tag或文本节点替代"></a>移除文档树中的某段内容,并用新tag或文本节点替代</h3><pre><code>new_tag = soup.new_tag(&quot;b&quot;)
+new_tag.string = &quot;example.net&quot;
+a_tag.i.replace_with(new_tag)
+</code></pre><h3 id="包装，给当前tag套一层父元素"><a href="#包装，给当前tag套一层父元素" class="headerlink" title="包装，给当前tag套一层父元素"></a>包装，给当前tag套一层父元素</h3><pre><code>wrap()
+</code></pre><h3 id="解包，移除tag内的所有tag标签"><a href="#解包，移除tag内的所有tag标签" class="headerlink" title="解包，移除tag内的所有tag标签"></a>解包，移除tag内的所有tag标签</h3><pre><code>unwrap()
+</code></pre>
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bs4/">bs4</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/04/01/notebook/urllib/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">urllib模块摘要&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 JanirDai&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
